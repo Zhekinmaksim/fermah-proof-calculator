@@ -65,7 +65,7 @@ export const PROOF_SYSTEMS: ProofSystem[] = [
   {
     id: 'groth16',
     name: 'Groth16',
-    fullName: 'Groth16 / zkSync-style pipeline',
+    fullName: 'Groth16 (SNARK)',
     description: 'Public zkSync-style benchmark baseline. Good for rollup batch cost estimates.',
     relativeCost: 1,
     relativeTime: 1,
@@ -74,7 +74,7 @@ export const PROOF_SYSTEMS: ProofSystem[] = [
   {
     id: 'stark',
     name: 'STARK',
-    fullName: 'STARK / FRI-based',
+    fullName: 'STARK (FRI-based)',
     description: 'Derived from the same public baseline; useful for sensitivity analysis, not quoted pricing.',
     relativeCost: 0.92,
     relativeTime: 0.9,
@@ -92,7 +92,7 @@ export const PROOF_SYSTEMS: ProofSystem[] = [
   {
     id: 'sp1',
     name: 'SP1',
-    fullName: 'Succinct SP1',
+    fullName: 'SP1 (Succinct)',
     description: 'Ethereum block proving scenario for zkVM-style execution proofs.',
     relativeCost: 1.42,
     relativeTime: 1.45,
@@ -101,7 +101,7 @@ export const PROOF_SYSTEMS: ProofSystem[] = [
   {
     id: 'plonk',
     name: 'Plonk',
-    fullName: 'Plonk / universal setup',
+    fullName: 'Plonk (Universal)',
     description: 'Derived rollup estimate for universal-setup proving systems.',
     relativeCost: 0.96,
     relativeTime: 0.94,
@@ -113,10 +113,10 @@ export const CHAINS: Chain[] = [
   {
     id: 'zksync',
     name: 'ZKsync Era',
-    shortName: 'ZKsync',
+    shortName: 'ZKsync Era',
     proofSystems: ['groth16', 'stark', 'plonk'],
     avgBatchSize: 3985,
-    batchLabel: '~3,985 tx/batch',
+    batchLabel: '~4,000 tx/batch',
     complexityMultiplier: 1,
     confidence: 'public benchmark',
     note: 'Uses the public Chorus One zkSync proving-cost benchmark as the baseline.',
