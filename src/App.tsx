@@ -91,34 +91,25 @@ function LogoMark() {
 function Hero() {
   return (
     <section id="calculator" className="border-b border-line bg-canvas">
-      <div className="mx-auto max-w-[1180px] px-5 py-8 md:px-8 lg:py-10">
-        <div className="mb-8 grid grid-cols-1 items-end gap-5 lg:grid-cols-[0.9fr_1fr]">
+      <div className="mx-auto max-w-[1180px] px-5 py-3 md:px-8 lg:py-4">
+        <div className="mb-3 grid grid-cols-1 items-end gap-4 lg:grid-cols-[0.9fr_1fr]">
           <div>
-            <div className="mb-3 flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.14em] text-muted">
+            <div className="mb-1.5 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.13em] text-muted">
               <span className="h-px w-9 bg-line" />
               Public benchmark model
             </div>
-            <h1 className="max-w-[680px] font-display text-[46px] font-normal leading-[0.98] text-ink md:text-[60px]">
+            <h1 className="max-w-[680px] font-display text-[34px] font-normal leading-[0.98] text-ink md:text-[40px]">
               Proof cost calculator.
             </h1>
           </div>
           <div>
-            <p className="max-w-[560px] text-[18px] leading-7 text-muted">
+            <p className="max-w-[560px] text-[13px] leading-5 text-muted">
               Estimate monthly proving costs from public benchmarks, compare a self-hosted baseline with a market-efficiency scenario, and see the assumptions behind every number.
             </p>
           </div>
         </div>
 
         <CalculatorPanel />
-
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <TrustMetric label="Baseline" value="$17.97" detail="per zkSync batch" />
-          <TrustMetric label="Batch size" value="3,985" detail="tx benchmark" />
-          <TrustMetric label="Proving time" value="9.5h" detail="single L4 GPU" />
-        </div>
-        <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.1em] text-soft">
-          Not live Fermah pricing. Live market data needs an official public pricing API.
-        </p>
       </div>
     </section>
   );
@@ -159,47 +150,46 @@ function CalculatorPanel() {
   return (
     <section className="bg-canvas" aria-label="Proof cost calculator">
       <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.08fr_0.92fr]">
-        <div className="border-b border-line pb-9 lg:border-b-0 lg:border-r-[3px] lg:border-ink lg:pb-0 lg:pr-12">
+        <div className="border-b border-line pb-7 lg:border-b-0 lg:border-r-[3px] lg:border-ink lg:pb-0 lg:pr-10">
           <Fieldset legend="Target chain">
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
               {CHAINS.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => setChainId(item.id)}
                   aria-pressed={chainId === item.id}
-                  className={`min-h-[84px] rounded-lg border px-6 py-4 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
+                  className={`min-h-[52px] rounded-lg border px-5 py-2 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
                     chainId === item.id
                       ? 'border-ink bg-ink text-canvas'
                       : 'border-line bg-canvas text-ink hover:border-ink'
                   }`}
                 >
-                  <span className="block font-body text-[20px] font-semibold leading-none">{item.shortName}</span>
-                  <span className="mt-2 block font-mono text-[13px] leading-4 opacity-70">{item.batchLabel}</span>
+                  <span className="block font-body text-[17px] font-semibold leading-none">{item.shortName}</span>
+                  <span className="mt-1 block font-mono text-[11px] leading-4 opacity-70">{item.batchLabel}</span>
                 </button>
               ))}
             </div>
-            <p className="mt-4 max-w-[560px] font-mono text-[14px] leading-5 text-muted">{chain.note}</p>
+            <p className="mt-1.5 max-w-[560px] truncate font-mono text-[10px] leading-4 text-muted">{chain.note}</p>
           </Fieldset>
 
           <Fieldset legend="Proof system">
-            <div className="flex flex-col gap-2.5">
+            <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
               {availableProofSystems.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => setProofSystemId(item.id)}
                   aria-pressed={proofSystemId === item.id}
-                  className={`flex min-h-[94px] items-start gap-4 rounded-lg border px-6 py-4 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
+                  className={`flex min-h-[44px] items-center gap-3 rounded-lg border px-4 py-2 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
                     proofSystemId === item.id
                       ? 'border-rust bg-rust/5'
                       : 'border-line bg-canvas hover:border-ink'
                   }`}
                 >
-                  <span className={`mt-1.5 h-3.5 w-3.5 shrink-0 border-2 ${proofSystemId === item.id ? 'border-rust bg-rust' : 'border-soft'}`} />
-                  <span>
-                    <span className="block font-body text-[21px] font-semibold leading-none text-ink">{item.fullName}</span>
-                    <span className="mt-2 block max-w-[460px] font-mono text-[14px] leading-5 text-muted">{item.description}</span>
+                  <span className={`h-3 w-3 shrink-0 border-2 ${proofSystemId === item.id ? 'border-rust bg-rust' : 'border-soft'}`} />
+                  <span className="min-w-0">
+                    <span className="block truncate font-body text-[16px] font-semibold leading-none text-ink">{item.fullName}</span>
                   </span>
                 </button>
               ))}
@@ -208,14 +198,14 @@ function CalculatorPanel() {
 
           <Fieldset legend="Workload">
             <div>
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-4">
                 <input
                   type="range"
                   min="1"
                   max="500"
                   value={Math.min(batchesPerDay, 500)}
                   onChange={(event) => setBatchesPerDay(Number(event.target.value))}
-                  className="h-1.5 flex-1 cursor-pointer appearance-none bg-line accent-rust [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-line [&::-webkit-slider-thumb]:bg-canvas"
+                  className="h-1.5 flex-1 cursor-pointer appearance-none bg-line accent-rust [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-line [&::-webkit-slider-thumb]:bg-canvas"
                   aria-label="Batches per day"
                 />
                 <input
@@ -224,11 +214,11 @@ function CalculatorPanel() {
                   max="10000"
                   value={batchesPerDay}
                   onChange={(event) => setBatchesPerDay(normalizeBatches(event.target.value))}
-                  className="h-14 w-40 rounded-lg border border-line bg-canvas px-6 text-right font-mono text-[24px] text-ink outline-none focus:border-rust"
+                  className="h-12 w-32 rounded-lg border border-line bg-canvas px-5 text-right font-mono text-[22px] text-ink outline-none focus:border-rust"
                   aria-label="Batches per day value"
                 />
               </div>
-              <div className="mt-2 flex justify-between font-mono text-[13px] text-muted">
+              <div className="mt-1.5 flex justify-between font-mono text-[12px] text-muted">
                 <span>1</span>
                 <span>Light</span>
                 <span>Medium</span>
@@ -242,12 +232,12 @@ function CalculatorPanel() {
             type="button"
             onClick={() => setUseMarketEfficiency((value) => !value)}
             aria-pressed={useMarketEfficiency}
-            className="mt-8 flex w-full items-center justify-center gap-10 rounded-lg border border-line bg-canvas px-6 py-4 text-center transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
+            className="mt-3 flex w-full items-center justify-center gap-7 rounded-lg border border-line bg-canvas px-5 py-2.5 text-center transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
           >
             <span className={`relative h-7 w-16 shrink-0 bg-ink transition-colors ${useMarketEfficiency ? 'bg-ink' : 'bg-line'}`}>
               <span className={`absolute top-1 h-5 w-5 bg-canvas transition-transform ${useMarketEfficiency ? 'translate-x-9' : 'translate-x-1'}`} />
             </span>
-            <span className="max-w-[210px] font-body text-[22px] font-semibold leading-6 text-ink">
+            <span className="max-w-[210px] font-body text-[18px] font-semibold leading-5 text-ink">
               Use Fermah Proof Market
             </span>
             <span className="font-mono text-[13px] leading-4 text-muted">
@@ -256,22 +246,22 @@ function CalculatorPanel() {
           </button>
         </div>
 
-        <div className="flex flex-col pt-9 lg:pl-12 lg:pt-2">
-          <div className="font-mono text-[14px] uppercase tracking-[0.18em] text-soft">Estimate</div>
-          <div className="mt-5 font-display text-[76px] leading-none text-ink md:text-[92px]">
+        <div className="flex flex-col pt-7 lg:pl-10 lg:pt-1">
+          <div className="font-mono text-[13px] uppercase tracking-[0.18em] text-soft">Estimate</div>
+          <div className="mt-2 font-display text-[58px] leading-none text-ink md:text-[64px]">
             {money.format(estimate.monthlyCost)}
           </div>
-          <div className="mt-1 font-mono text-[16px] text-muted">
+          <div className="mt-1 font-mono text-[14px] text-muted">
             per month
           </div>
 
           {useMarketEfficiency && (
-            <div className="mt-1 font-mono text-[15px] text-rust">
+            <div className="mt-1 font-mono text-[13px] text-rust">
               saving {money.format(estimate.savingsMonthly)}/mo vs self-hosted
             </div>
           )}
 
-          <div className="my-9 h-[3px] bg-ink" />
+          <div className="my-4 h-[3px] bg-ink" />
 
           <ResultRow label="Cost per batch" value={preciseMoney.format(estimate.costPerBatch)} />
           <ResultRow label="Cost per tx" value={preciseMoney.format(estimate.costPerTx)} />
@@ -280,16 +270,16 @@ function CalculatorPanel() {
           <ResultRow label="Operators needed" value={String(estimate.operatorsNeeded)} />
           <ResultRow label="Monthly batches" value={integer.format(estimate.monthlyVolumeBatches)} />
 
-          <div className="mt-9 border border-rust/35 bg-rust/5 p-6">
-            <div className="font-mono text-[13px] uppercase tracking-[0.18em] text-rust">Fermah vs self-hosted</div>
-            <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-5">
+          <div className="mt-3 border border-rust/35 bg-rust/5 p-3.5">
+            <div className="font-mono text-[12px] uppercase tracking-[0.18em] text-rust">Fermah vs self-hosted</div>
+            <div className="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
               <SmallNumber label="Self-hosted" value={money.format(estimate.baselineMonthlyCost)} />
               <div className="font-display text-[34px] text-line">vs</div>
               <SmallNumber label="Market scenario" value={money.format(estimate.monthlyCost)} accent />
             </div>
           </div>
 
-          <p className="mt-8 max-w-[440px] font-mono text-[13px] leading-5 text-muted">
+          <p className="mt-3 max-w-[440px] font-mono text-[11px] leading-4 text-muted">
             Based on public benchmark data and scenario multipliers. Current model: {estimate.confidence}.
           </p>
         </div>
@@ -300,8 +290,8 @@ function CalculatorPanel() {
 
 function Fieldset({ legend, children }: { legend: string; children: React.ReactNode }) {
   return (
-    <fieldset className="mt-9 first:mt-0">
-      <legend className="mb-4 font-mono text-[14px] uppercase tracking-[0.18em] text-muted">{legend}</legend>
+    <fieldset className="mt-3 first:mt-0">
+      <legend className="mb-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">{legend}</legend>
       {children}
     </fieldset>
   );
@@ -309,7 +299,7 @@ function Fieldset({ legend, children }: { legend: string; children: React.ReactN
 
 function ResultRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 border-b border-line py-3.5 font-mono text-[18px]">
+    <div className="flex items-baseline justify-between gap-4 border-b border-line py-1.5 font-mono text-[14px]">
       <span className="text-muted">{label}</span>
       <span className="text-right font-semibold text-ink">{value}</span>
     </div>
@@ -319,8 +309,8 @@ function ResultRow({ label, value }: { label: string; value: string }) {
 function SmallNumber({ label, value, accent = false }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className={accent ? 'text-right' : ''}>
-      <div className={`font-mono text-[13px] ${accent ? 'text-rust' : 'text-muted'}`}>{accent ? 'Fermah Market' : label}</div>
-      <div className={`mt-1 font-display text-[36px] leading-none ${accent ? 'text-rust' : 'text-ink'}`}>{value}</div>
+      <div className={`font-mono text-[12px] ${accent ? 'text-rust' : 'text-muted'}`}>{accent ? 'Fermah Market' : label}</div>
+      <div className={`mt-1 font-display text-[28px] leading-none ${accent ? 'text-rust' : 'text-ink'}`}>{value}</div>
     </div>
   );
 }
