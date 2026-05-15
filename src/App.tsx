@@ -34,8 +34,8 @@ export default function App() {
     <>
       <Nav />
       <main>
-        <Hero />
-        <BenchmarkStrip />
+        <LandingHero />
+        <CalculatorSection />
         <Methodology />
         <ProofSystems />
         <UseCases />
@@ -88,40 +88,75 @@ function LogoMark() {
   );
 }
 
-function Hero() {
+function LandingHero() {
   return (
-    <section id="calculator" className="border-b border-line bg-canvas">
-      <div className="mx-auto max-w-[1180px] px-5 py-3 md:px-8 lg:py-4">
-        <div className="mb-3 grid grid-cols-1 items-end gap-4 lg:grid-cols-[0.9fr_1fr]">
-          <div>
-            <div className="mb-1.5 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.13em] text-muted">
-              <span className="h-px w-9 bg-line" />
-              Public benchmark model
-            </div>
-            <h1 className="max-w-[680px] font-display text-[34px] font-normal leading-[0.98] text-ink md:text-[40px]">
-              Proof cost calculator.
-            </h1>
+    <section className="border-b border-line bg-canvas">
+      <div className="mx-auto grid min-h-[calc(100vh-76px)] max-w-[1320px] grid-cols-1 items-end gap-14 px-5 py-10 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-14">
+        <div className="pb-2">
+          <div className="mb-7 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            <span className="h-px w-9 bg-line" />
+            Community tool · Fermah ecosystem
           </div>
-          <div>
-            <p className="max-w-[560px] text-[13px] leading-5 text-muted">
-              Estimate monthly proving costs from public benchmarks, compare a self-hosted baseline with a market-efficiency scenario, and see the assumptions behind every number.
-            </p>
-          </div>
+          <h1 className="max-w-[720px] font-display text-[56px] font-normal leading-[0.92] tracking-tight text-ink md:text-[88px] lg:text-[110px]">
+            <span className="block">A marketplace</span>
+            <span className="block">for <em className="italic text-rust">zero-knowledge</em></span>
+            <span className="block">compute.</span>
+          </h1>
         </div>
 
-        <CalculatorPanel />
+        <div className="flex flex-col items-start gap-7 pb-4">
+          <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-soft">FERMAH / PROVING NETWORK / EST. 2024</div>
+          <p className="max-w-[470px] text-[22px] leading-relaxed text-ink">
+            A decentralized marketplace where rollups, bridges and ZK apps buy proofs from the cheapest <em className="italic text-rust">available</em> operator, in seconds, not hours.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="#calculator"
+              className="inline-flex items-center gap-2 rounded-full border border-ink bg-ink px-6 py-4 font-mono text-[12px] uppercase tracking-[0.12em] text-canvas no-underline transition-colors hover:border-rust hover:bg-rust"
+            >
+              Open the calculator
+            </a>
+            <a
+              href="#methodology"
+              className="inline-flex items-center gap-2 rounded-full border border-ink px-6 py-4 font-mono text-[12px] uppercase tracking-[0.12em] text-ink no-underline transition-colors hover:bg-ink hover:text-canvas"
+            >
+              How it works
+            </a>
+          </div>
+          <div className="w-full max-w-[470px] rounded-md border border-line bg-panel p-5">
+            <h4 className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-soft">Field report · zkSync integration</h4>
+            <div className="font-display text-[22px] italic leading-snug text-ink">
+              We dropped batch proving latency by <em className="not-italic text-rust">3.4x</em> and cut per-batch cost roughly a third without provisioning a single GPU.
+            </div>
+            <div className="mt-3 font-mono text-[11px] text-soft">Infrastructure team, zkSync · 2025</div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-function TrustMetric({ label, value, detail }: { label: string; value: string; detail: string }) {
+function CalculatorSection() {
   return (
-    <div className="border border-line bg-panel px-4 py-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-soft">{label}</div>
-      <div className="mt-1 font-display text-[34px] leading-none text-ink">{value}</div>
-      <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">{detail}</div>
-    </div>
+    <section id="calculator" className="border-b border-line bg-canvas">
+      <div className="mx-auto max-w-[1180px] px-5 py-8 md:px-8 lg:py-10">
+        <div className="mb-5 grid grid-cols-1 items-end gap-5 lg:grid-cols-[0.8fr_1fr]">
+          <div>
+            <div className="mb-2 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.13em] text-muted">
+              <span className="h-px w-9 bg-line" />
+              Public benchmark model
+            </div>
+            <h2 className="font-display text-[34px] font-normal leading-[0.98] text-ink md:text-[42px]">
+              Proof cost calculator.
+            </h2>
+          </div>
+          <p className="max-w-[620px] text-[14px] leading-6 text-muted">
+            Estimates use public benchmark data and explicit scenario multipliers. This is a pricing model, not a live Fermah quote feed.
+          </p>
+        </div>
+        <CalculatorPanel />
+      </div>
+    </section>
   );
 }
 
@@ -311,29 +346,6 @@ function SmallNumber({ label, value, accent = false }: { label: string; value: s
     <div className={accent ? 'text-right' : ''}>
       <div className={`font-mono text-[12px] ${accent ? 'text-rust' : 'text-muted'}`}>{accent ? 'Fermah Market' : label}</div>
       <div className={`mt-1 font-display text-[28px] leading-none ${accent ? 'text-rust' : 'text-ink'}`}>{value}</div>
-    </div>
-  );
-}
-
-function BenchmarkStrip() {
-  const items = [
-    ['Data mode', 'Public benchmark'],
-    ['Baseline cost', '$17.97 / batch'],
-    ['Baseline time', '9.5h / L4 GPU'],
-    ['Market factor', 'Scenario, not quote'],
-    ['Live pricing', 'API required'],
-  ];
-
-  return (
-    <div className="border-b border-line bg-panel">
-      <div className="mx-auto flex max-w-[1320px] overflow-x-auto px-5 md:px-8">
-        {items.map(([label, value]) => (
-          <div key={label} className="min-w-[220px] border-r border-line px-5 py-4 first:border-l">
-            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-soft">{label}</div>
-            <div className="mt-1 font-body text-[18px] font-semibold text-ink">{value}</div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
